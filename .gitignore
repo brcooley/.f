@@ -1,0 +1,16 @@
+# Compiled files
+*/__pycache__
+*.pyc
+*.beam
+*.out
+
+# Misc files
+*.tmp
+*.log
+*~
+
+# Others
+.DS_Store
+Desktop.ini
+Thumbs.db
+.Trashes
