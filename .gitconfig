@@ -1,0 +1,16 @@
+[user]
+	name = brc
+	email = brcooley@cs.wm.edu              
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[color]
+	ui = auto
+[color "status"]
+	changed = yellow
+[color "branch"]
+	current = reverse
+	remote = magenta
+[alias]
+	br = branch -a
+	l = log --oneline --graph
