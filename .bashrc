@@ -9,6 +9,7 @@ fi
 ulimit -c unlimited
 
 set -o notify
+set -o emacs
 
 export PATH="$PATH:~/bin"
 export EDITOR=nano
