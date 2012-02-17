@@ -3,29 +3,36 @@
 #	Bash script to "plugin" to the dotfile repository, does a lot of fun stuff
 #		like turning the normal dotfiles (eg .bashrc) into symlinks to this
 #		repository's versions of those files (ensure that updates are just a
-#		'git pull' away), optionally appending these files to the currently
-#		existing versions, setting up a cron job to automate the 
-#		aforementioned git pull, and maybe some more fun stuff
+#		'git pull' away), optionally moving old files so that they can be
+#		preserved, setting up a cron job to automate the aforementioned git
+#		pull, and maybe some more fun stuff
 #
 
-# shopt -s nocasematch	# This makes pattern matching case-insensitive
+shopt -s nocasematch	# This makes pattern matching case-insensitive
 
-overwrite=false
+POSTFIX="local"
+
+overwrite=true
 
 for opt in $@; do
 	case $opt in
-		-O | --overwrite) overwrite=true;;
+		-k | --keep-local) overwrite=false;;
 	esac
 done
 
 
 
 for f in .*; do
-	if [ "$f" = ".git" -o "$f" = "." -o "$f" = ".." ]; then continue; fi
-	if [ -f "$HOME/$f" -a $overwrite = false ]; then
-#		mv "~/$f" "~/${PREFIX}_$f"
-		echo "Moving ~/$f to $HOME/${f}_$POSTFIX"
+	if [ "$f" = ".git" -o "$f" = "." -o "$f" = ".." -o "$f" = ".f" ]; then continue; fi
+	if [ -f "$HOME/$f" ]; then
+		if [ $overwrite = false ]; then
+			mv "$HOME/$f" "$HOME/${f}_$POSTFIX"
+		else
+			rm "$HOME/$f"
+		fi
+		# echo "Moving ~/$f to $HOME/${f}_$POSTFIX"
 	fi
-#	ln -s "$PWD/$f" "~/$f"
+	ln -s "$PWD/$f" "$HOME/$f"
 done
 
+crontab ".jobs.cron"

@@ -5,6 +5,11 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+# Source machine specific definitions
+if [ -f ~/.bashrc_local ]; then
+	. ~/.bashrc_local
+fi
+
 # User specific aliases and functions
 ulimit -c unlimited
 

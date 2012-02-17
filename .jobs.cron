@@ -1,0 +1,2 @@
+0 *	* *	* if [ -f core.* ]; then rm core.*; fi
+0 */2 *	* *	cd ~/.f; git pull origin master
