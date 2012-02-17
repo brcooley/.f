@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+#	Bash script to "plugin" to the dotfile repository, does a lot of fun stuff
+#		like turning the normal dotfiles (eg .bashrc) into symlinks to this
+#		repository's versions of those files (ensure that updates are just a
+#		'git pull' away), optionally appending these files to the currently
+#		existing versions, setting up a cron job to automate the 
+#		aforementioned git pull, and maybe some more fun stuff
+#
+
+# shopt -s nocasematch	# This makes pattern matching case-insensitive
+
+overwrite=false
+
+for opt in $@; do
+	case $opt in
+		-O | --overwrite) overwrite=true;;
+	esac
+done
+
+
+
+for f in .*; do
+	if [ "$f" = ".git" -o "$f" = "." -o "$f" = ".." ]; then continue; fi
+	if [ -f "$HOME/$f" -a $overwrite = false ]; then
+#		mv "~/$f" "~/${PREFIX}_$f"
+		echo "Moving ~/$f to $HOME/${f}_$POSTFIX"
+	fi
+#	ln -s "$PWD/$f" "~/$f"
+done
+

@@ -1,6 +1,6 @@
 [user]
 	name = brc
-	email = brcooley@cs.wm.edu              
+	email = brett@cooleyweb.org
 [branch "master"]
 	remote = origin
 	merge = refs/heads/master
