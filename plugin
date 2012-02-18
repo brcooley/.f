@@ -11,12 +11,24 @@
 shopt -s nocasematch	# This makes pattern matching case-insensitive
 
 POSTFIX="local"
+URL="https://github.com/brcooley/.f.git"
+PUSHURL="git@github.com:brcooley/.f.git"
 
 overwrite=true
+
+print_help () {
+	echo -e "\nA script to keep dotfiles up to date\n"
+	echo "Options:"
+	echo "    -k, --keep-local    Keeps local copies of dotfiles by appending"
+	echo "                        \"$POSTFIX\" to them"
+	exit 0
+}
+
 
 for opt in $@; do
 	case $opt in
 		-k | --keep-local) overwrite=false;;
+		-h | --help) print_help;;
 	esac
 done
 
@@ -35,4 +47,6 @@ for f in .*; do
 	ln -s "$PWD/$f" "$HOME/$f"
 done
 
+git config --local remote.origin.url "$URL"
+git config --local remote.origin.pushurl "$PUSHURL"
 crontab ".jobs.cron"
