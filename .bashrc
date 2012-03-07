@@ -14,7 +14,7 @@ fi
 ulimit -c unlimited
 
 set -o notify
-set -o emacs
+# set -o emacs
 
 export PATH="$PATH:~/bin"
 export EDITOR=nano
@@ -23,6 +23,7 @@ alias ll="ls -l"
 alias la="ls -lA"
 alias ..="cd .."
 alias yum="sudo yum"
+alias apt="sudo apt-get"
 alias edit="nano"
 alias ebrc="nano ~/.bashrc"
 alias upd="source ~/.bashrc"
