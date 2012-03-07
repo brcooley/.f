@@ -49,4 +49,4 @@ done
 
 git config --local remote.origin.url "$URL"
 git config --local remote.origin.pushurl "$PUSHURL"
-crontab ".jobs.cron"
+crontab .jobs.cron
