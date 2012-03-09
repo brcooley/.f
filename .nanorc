@@ -1,0 +1,8 @@
+set autoindent
+set cut
+set quickblank
+set smooth
+set suspend
+set tabsize 4
+set poslog
+set multibuffer
