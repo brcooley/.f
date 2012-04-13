@@ -7,10 +7,13 @@
 # Misc files
 *.tmp
 *.log
+core[.]*
 *~
+*,cover
 
 # Others
 .DS_Store
 Desktop.ini
 Thumbs.db
 .Trashes
+.coverage
