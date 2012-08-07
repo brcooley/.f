@@ -33,3 +33,7 @@ alias quota="quota -sQ"
 alias gitstatus="git status"
 
 alias sciclone="ssh -p2993 localhost"
+
+gitclone() {
+	git clone git@github.com:brcooley/$1
+}
