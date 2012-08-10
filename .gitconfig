@@ -16,4 +16,4 @@
 	remote = magenta
 [alias]
 	br = branch -a
-	l = log --oneline --graph
+	l = log --graph --pretty=format:'%C(yellow)%h%Creset %s [%ar]'
