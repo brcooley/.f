@@ -14,11 +14,11 @@ fi
 ulimit -c unlimited
 
 set -o notify
-# set -o emacs
 
 export PATH="$PATH:~/bin"
 export EDITOR=nano
 
+alias ls="ls --color=auto"
 alias ll="ls -l"
 alias la="ls -lA"
 alias ..="cd .."

@@ -4,5 +4,6 @@ set quickblank
 set smooth
 set suspend
 set tabsize 4
-set poslog
+# Seems to cause issues in some versions of nano (2.2.5)
+# set poslog
 set multibuffer
