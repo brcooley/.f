@@ -15,7 +15,7 @@ ulimit -c unlimited
 
 set -o notify
 
-export PATH="$PATH:~/bin"
+# export PATH="$PATH:~/bin"
 export EDITOR=nano
 
 alias ls="ls --color=auto"
