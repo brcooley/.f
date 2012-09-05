@@ -11,23 +11,28 @@
 shopt -s nocasematch	# This makes pattern matching case-insensitive
 
 POSTFIX="local"
-URL="https://github.com/brcooley/.f.git"
-PUSHURL="git@github.com:brcooley/.f.git"
 
-overwrite=true
+# We're attempting to use the git url for both pushing and pulling
+#
+# URL="https://github.com/brcooley/.f.git"
+
+PUSHURL="git@github.com:brcooley/.f.git"
+URL=$PUSHURL
+
+overwrite=false
 
 print_help () {
 	echo -e "\nA script to keep dotfiles up to date\n"
 	echo "Options:"
-	echo "    -k, --keep-local    Keeps local copies of dotfiles by appending"
-	echo "                        \"$POSTFIX\" to them"
+	echo "    -r, --remove-local  Removes local copies of dotfiles instead"
+	echo "                        of appending \"$POSTFIX\" to them"
 	exit 0
 }
 
 
 for opt in $@; do
 	case $opt in
-		-k | --keep-local) overwrite=false;;
+		-r | --remove-local) overwrite=true;;
 		-h | --help) print_help;;
 	esac
 done
@@ -42,7 +47,7 @@ for f in .*; do
 		else
 			rm "$HOME/$f"
 		fi
-		# echo "Moving ~/$f to $HOME/${f}_$POSTFIX"
+		echo "Moving ~/$f to $HOME/${f}_$POSTFIX"
 	fi
 	ln -s "$PWD/$f" "$HOME/$f"
 done
