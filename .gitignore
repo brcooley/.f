@@ -12,6 +12,7 @@ a.out
 core[.]*
 *~
 .cache
+.sass-cache
 .metadata
 .nfs*
 *,cover
