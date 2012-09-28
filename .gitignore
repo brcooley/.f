@@ -1,15 +1,23 @@
-# Compiled files
+# Compiled/generated files
 */__pycache__
 *.pyc
 *.beam
 *.out
+*synctex.*
+a.out
 
 # Misc files
 *.tmp
 *.log
 core[.]*
 *~
+.cache
+.metadata
+.nfs*
 *,cover
+
+# Other source control
+.hg
 
 # Others
 .DS_Store

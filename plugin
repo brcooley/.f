@@ -11,13 +11,10 @@
 shopt -s nocasematch	# This makes pattern matching case-insensitive
 
 POSTFIX="local"
+PLUGIN_FILES=( .bash_profile .bashrc .gitconfig .gitignore .jobs.cron .nanorc )
 
-# We're attempting to use the git url for both pushing and pulling
-#
-# URL="https://github.com/brcooley/.f.git"
-
+URL="https://github.com/brcooley/.f.git"
 PUSHURL="git@github.com:brcooley/.f.git"
-URL=$PUSHURL
 
 overwrite=false
 
@@ -37,10 +34,12 @@ for opt in $@; do
 	esac
 done
 
+if ! [ -f "./plugin" ]; then
+	echo "Must be run from .f directory!"
+	exit 1
+fi
 
-
-for f in .*; do
-	if [ "$f" = ".git" -o "$f" = "." -o "$f" = ".." -o "$f" = ".f" ]; then continue; fi
+for f in ${PLUGIN_FILES[@]}; do
 	if [ -f "$HOME/$f" ]; then
 		if [ $overwrite = false ]; then
 			mv "$HOME/$f" "$HOME/${f}_$POSTFIX"
@@ -55,6 +54,6 @@ done
 # Git versions prior to 1.7.? (1.7.1 confirmed) do not have a --local option
 git config --local remote.origin.url "$URL"
 git config --local remote.origin.pushurl "$PUSHURL"
-crontab .jobs.cron
-source ~/.bashrc
+crontab .jobs.cron &&
+source ~/.bashrc &&
 echo "Plugin succesful"

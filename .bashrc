@@ -5,17 +5,11 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-# Source machine specific definitions
-if [ -f ~/.bashrc_local ]; then
-	. ~/.bashrc_local
-fi
-
 # User specific aliases and functions
 ulimit -c unlimited
 
 set -o notify
 
-# export PATH="$PATH:~/bin"
 export EDITOR=nano
 
 alias ls="ls --color=auto"
@@ -37,3 +31,8 @@ alias sciclone="ssh -p2993 localhost"
 gitclone() {
 	git clone git@github.com:brcooley/$1
 }
+
+# Finally source machine specific definitions so we can overwrite these if needed
+if [ -f ~/.bashrc_local ]; then
+	. ~/.bashrc_local
+fi
