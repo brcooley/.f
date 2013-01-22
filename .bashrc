@@ -13,8 +13,8 @@ set -o notify
 export EDITOR=nano
 
 alias ls="ls --color=auto"
-alias ll="ls -l"
-alias la="ls -lA"
+alias ll="ls -l --group-directories"
+alias la="ls -lA --group-directories"
 alias ..="cd .."
 alias yum="sudo yum"
 alias apt="sudo apt-get"

@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+#	turbo - Quickly set up a dev environment by installing needed packages
+#		for development. For added speed, you can define "mixtures" of many
+#		such packages, and install all of them with one command.
+
+print_help () {
+	echo -e "\nScript to quickly find and install packages needed for development\n"
+	echo "Options:"
+	echo "    -l, --local  Install everything locally (doesn't require root)"
+	echo "    -h, --help   Print this help message"
+	exit 0
+}
+
+# Arg parsing
+
+for opt in $@; do
+	case $opt in
+		-l | --local) local=true;;
+		-h | --help) print_help;;
+	esac
+done
