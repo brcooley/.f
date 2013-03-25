@@ -43,13 +43,20 @@ for f in ${PLUGIN_FILES[@]}; do
 	if [ -f "$HOME/$f" ]; then
 		if [ $overwrite = false ]; then
 			mv "$HOME/$f" "$HOME/${f}_$POSTFIX"
+			echo "Moving ~/$f to $HOME/${f}_$POSTFIX"
 		else
 			rm "$HOME/$f"
 		fi
-		echo "Moving ~/$f to $HOME/${f}_$POSTFIX"
 	fi
 	ln -s "$PWD/$f" "$HOME/$f"
 done
+
+# Roll into above loop
+if [ -d "$HOME/bin" ]; then
+	echo "$HOME/bin exists, not overwriting"
+else
+	ln -s "$PWD/bin" "$HOME/bin"
+fi
 
 # Git versions prior to 1.7.? (1.7.1 confirmed) do not have a --local option
 git config --local remote.origin.url "$URL"
