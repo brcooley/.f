@@ -1,2 +1,1 @@
-*/5	*	*	*	*	for f in ~/core.*; do rm "$f" >& /dev/null; done
 */2	*	* 	*	*	cd ~/.f; git pull origin master >& /dev/null
