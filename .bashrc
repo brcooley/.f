@@ -32,6 +32,15 @@ gitclone() {
 	git clone git@github.com:brcooley/$1
 }
 
+sublime() {
+	os=`uname -a | awk '{ print $1 }'`
+	if [ $os == "Darwin" ]; then
+		alias sublime="/Applications/Sublime\ Text\ 2.app/Contents/MacOS/Sublime\ Text\ 2"
+	# else
+	#	alias sublime="/usr/bin/sublime"
+	fi
+}
+
 # Finally source machine specific definitions so we can overwrite these if needed
 if [ -f ~/.bashrc_local ]; then
 	. ~/.bashrc_local
