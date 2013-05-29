@@ -1,1 +1,2 @@
+MAILTO=""
 */2	*	* 	*	*	cd ~/.f; git pull origin master >& /dev/null
