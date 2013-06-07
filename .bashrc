@@ -19,14 +19,15 @@ alias ..="cd .."
 alias yum="sudo yum"
 alias apt="sudo apt-get"
 alias pip="sudo pip"
-alias edit="nano"
+alias edit="nano" # Questioning usage
 alias ebrc="nano ~/.bashrc"
 alias upd="source ~/.bashrc"
 alias o="less"
 alias quota="quota -sQ"
 alias gitstatus="git status"
 
-alias sciclone="ssh -p2993 localhost"
+alias sciclone="ssh -p2993 localhost" # Should be in a _local
+alias tsyslog="sudo tail -f /var/log/syslog"
 
 gitclone() {
 	git clone git@github.com:brcooley/$1
