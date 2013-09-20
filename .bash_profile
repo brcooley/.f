@@ -12,6 +12,11 @@ if [ -d "${HOME}/.local/bin" ]; then
 	PATH="${HOME}/.local/bin:${PATH}"
 fi
 
+# Source the local bash_profile if it exists
+if [ -f ~/.bash_profile_local ]; then
+	source ~/.bash_profile_local
+fi
+
 # Starting ssh-agent if not already started, from http://mah.everybody.org/docs/ssh
 function start_agent {
     # echo "Initialising new SSH agent..."
