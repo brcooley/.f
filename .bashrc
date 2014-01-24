@@ -19,7 +19,6 @@ alias ..="cd .."
 alias ebrc="nano ~/.bashrc"
 alias upd="source ~/.bashrc"
 alias o="less"
-alias quota="quota -sQ"
 alias gitstatus="git status"
 
 alias tsyslog="sudo tail -f /var/log/syslog"
