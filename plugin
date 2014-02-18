@@ -11,7 +11,7 @@
 shopt -s nocasematch	# This makes pattern matching case-insensitive
 
 POSTFIX="local"
-PLUGIN_FILES=( .bash_profile .bashrc .gitconfig .gitignore .jobs.cron .nanorc )
+PLUGIN_FILES=( .bash_profile .bashrc .gitconfig .gitignore .jobs.cron .nanorc .tmux.conf )
 
 URL="https://github.com/brcooley/.f.git"
 PUSHURL="git@github.com:brcooley/.f.git"
