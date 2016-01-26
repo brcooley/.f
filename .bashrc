@@ -9,6 +9,7 @@ fi
 ulimit -c unlimited
 
 set -o notify
+shopt -s cdspell
 
 export EDITOR=nano
 
@@ -17,6 +18,7 @@ alias ll="ls -l --group-directories"
 alias la="ls -lA --group-directories"
 alias ..="cd .."
 alias ebrc="nano ~/.bashrc"
+alias ebrcl="nano ~/.bashrc_local; upd"
 alias upd="source ~/.bashrc"
 alias o="less"
 alias gitstatus="git status"
