@@ -1,8 +1,6 @@
 # This should take care of things that we don't want updated for every new shell
-# e.g. TERM, PATH and PS[1,2]
-
-# This could be more intelligent, but this works for xterm
-TERM=xterm-256color
+# e.g. PATH and PS[1,2]
+# NOTE: Do not set TERM in this file, espeically if you're using screen/tmux.
 
 # First, we set the PATH to include our private bin and .local bin
 if [ -d "${HOME}/bin" ] ; then
