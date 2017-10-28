@@ -1,66 +1,61 @@
 #!/bin/bash
 #
-#	Bash script to "plugin" to the dotfile repository, does a lot of fun stuff
-#		like turning the normal dotfiles (eg .bashrc) into symlinks to this
-#		repository's versions of those files (ensure that updates are just a
-#		'git pull' away), optionally moving old files so that they can be
-#		preserved, setting up a cron job to automate the aforementioned git
-#		pull, and maybe some more fun stuff
-#
+# Bash script to "plugin" to the dotfile repository. Turns normal dotfiles (e.g.
+# .bashrc) into symlinks to this repository's versions of those files. It
+# optionally moving old files so that they can be	preserved. A cron job is also
+# setup to automate pulling new changes from master.
 
-shopt -s nocasematch	# This makes pattern matching case-insensitive
+shopt -s nocasematch  # This makes pattern matching case-insensitive
 
 POSTFIX="local"
 PLUGIN_FILES=( .bash_profile .bashrc .gitconfig .gitignore .jobs.cron .nanorc .tmux.conf )
 
-URL="https://github.com/brcooley/.f.git"
+PULLURL="https://github.com/brcooley/.f.git"
 PUSHURL="git@github.com:brcooley/.f.git"
 
 overwrite=false
 
 print_help () {
-	echo -e "\nA script to keep dotfiles up to date\n"
-	echo "Options:"
-	echo "    -r, --remove-local  Removes local copies of dotfiles instead"
-	echo "                        of appending \"$POSTFIX\" to them"
-	exit 0
+  echo -e "\\nA script to keep dotfiles up to date\\n"
+  echo "Options:"
+  echo "  -r, --remove-local  Removes local copies of dotfiles instead of"
+  echo "                      appending \"$POSTFIX\" to them."
+  exit 0
 }
 
 
-for opt in $@; do
-	case $opt in
-		-r | --remove-local) overwrite=true;;
-		-h | --help) print_help;;
-	esac
+for opt in "$@"; do
+  case $opt in
+    -r | --remove-local) overwrite=true;;
+    -h | --help) print_help;;
+  esac
 done
 
 if ! [ -f "./plugin" ]; then
-	echo "Must be run from .f directory!"
-	exit 1
+  echo "Must be run from .f directory!"
+  exit 1
 fi
 
-for f in ${PLUGIN_FILES[@]}; do
-	if [ -f "$HOME/$f" ]; then
-		if [ $overwrite = false ]; then
-			mv "$HOME/$f" "$HOME/${f}_$POSTFIX"
-			echo "Moving ~/$f to $HOME/${f}_$POSTFIX"
-		else
-			rm "$HOME/$f"
-		fi
-	fi
-	ln -s "$PWD/$f" "$HOME/$f"
+for f in "${PLUGIN_FILES[@]}"; do
+  if [ -f "$HOME/$f" ]; then
+    if [ $overwrite = false ]; then
+      mv "$HOME/$f" "$HOME/${f}_$POSTFIX"
+      echo "Moving ~/$f to $HOME/${f}_$POSTFIX"
+    else
+      rm "$HOME/$f"
+    fi
+  fi
+  ln -s "$PWD/$f" "$HOME/$f"
 done
 
 # Roll into above loop
 if [ -d "$HOME/bin" ]; then
-	echo "$HOME/bin exists, not overwriting"
+  echo "$HOME/bin exists, not overwriting"
 else
-	ln -s "$PWD/bin" "$HOME/bin"
+  ln -s "$PWD/bin" "$HOME/bin"
 fi
 
 # Git versions prior to 1.7.? (1.7.1 confirmed) do not have a --local option
-git config --local remote.origin.url "$URL"
+git config --local remote.origin.url "$PULLURL"
 git config --local remote.origin.pushurl "$PUSHURL"
-crontab .jobs.cron &&
-source ~/.bashrc &&
-echo "Plugin succesful"
+crontab .jobs.cron && source ~/.bashrc && echo "Plugin succesful"
