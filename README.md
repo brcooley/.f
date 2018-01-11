@@ -1,6 +1,16 @@
-# Basic Dotfiles #
+# Basic Dotfiles
 
-Hopefully this will push me towards a unified setup everywhere
+A collection of dotfiles, attempting to be kept mostly cross-platform for
+*nix-based systems.
 
-Some other useful dotfile(s):
-	[rtomayko's bashrc](https://github.com/rtomayko/dotfiles/blob/rtomayko/.bashrc)
+## Usage
+
+```bash
+cd ~
+git clone git@github.com:brcooley/.f.git
+cd .f
+./plugin
+```
+
+Other useful dotfiles:
+*   [rtomayko's bashrc](https://github.com/rtomayko/dotfiles/blob/rtomayko/.bashrc)
