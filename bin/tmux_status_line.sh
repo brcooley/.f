@@ -27,5 +27,5 @@ day_hr=$(echo "$hashrate_json" | jq '.data.h24')
 hour_hr=$(echo "$hashrate_json" | jq '.data.h1')
 
 # Final format and display.
-printf "${weather}°F | ⚒ %.1f [%.1f] | ETH \$%'.2f [%.2f%%]" "$hour_hr" "$day_hr" "$eth_price" "$eth_change"
+/usr/bin/printf "${weather}°F | ⚒ %.1f [%.1f] | ETH \$%'.2f [%.2f%%]" "$hour_hr" "$day_hr" "$eth_price" "$eth_change"
 
