@@ -22,7 +22,7 @@ eth_change=$(echo "$eth_json" | jq '.[0].percent_change_1h' | cut -d\" -f 2)
 # Fetch miner hashrate.
 eth_account="$2"
 hashrate_json=$(runcached.py -t 30 \
-                "curl -s https://api.nanopool.org/v1/eth/avghashrate/$2")
+                "curl -s https://api.nanopool.org/v1/eth/avghashrate/$eth_account")
 day_hr=$(echo "$hashrate_json" | jq '.data.h24')
 hour_hr=$(echo "$hashrate_json" | jq '.data.h1')
 
