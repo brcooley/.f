@@ -13,9 +13,9 @@ shopt -s cdspell
 
 export EDITOR=nano
 
-alias ls="ls --color=auto"
-alias ll="ls -lh --group-directories"
-alias la="ls -lhA --group-directories"
+alias ls="ls -G"
+alias ll="ls -lGh"
+alias la="ls -lGhA"
 alias ..="cd .."
 alias ebrc="nano ~/.bashrc"
 alias ebrcl="nano ~/.bashrc_local; upd"
