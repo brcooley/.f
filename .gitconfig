@@ -19,3 +19,5 @@
 	default = matching
 [help]
 	autocorrect = 1
+[include]
+  path = .gitconfig_local
