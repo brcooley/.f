@@ -62,9 +62,9 @@ ghauth() {
   if [[ -z $SSH_KEYNAME ]]; then
     SSH_KEYNAME="id"
   fi
-  ssh-add "~/.ssh/$SSH_KEYNAME" 
+  ssh-add "$HOME/.ssh/$SSH_KEYNAME"
   if [[ "$?" = 2 ]]; then
-    eval $(ssh-agent -s) && ssh-add "~/.ssh/$SSH_KEYNAME"
+    eval $(ssh-agent -s) && ssh-add "$HOME/.ssh/$SSH_KEYNAME"
   fi
 }
 
