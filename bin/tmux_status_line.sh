@@ -1,31 +1,27 @@
 # A script to fetch a variety of data and display it on a single line. Used for
 # tmux status lines.
 #
-# Usage: tmux_status_line.sh <WEATHER_STATION_ID> <ETH_ACCOUNT>
+# Usage: tmux_status_line.sh <ZIP_CODE>
+
+# Fill this out here, or set it in .bash_profile_local
+OWM_APIKEY=""
 
 # Check for valid args, and print out directions if they aren't given.
-if [[ "$#" -ne 2 ]]; then
+if [[ "$#" -ne 1 ]]; then
   echo "Invalid args, check your tmux config"
   exit
 fi
 
 # Fetch PWS weather data from the station-id given by $1.
-pws_id="$1"
-weather=$(runcached.py -t 10 \
-          "curl -s 'http://api.wunderground.com/weatherstation/WXCurrentObXML.asp?ID=$pws_id' | grep temp_f | cut -d \> -f 2 | cut -d \. -f 1")
+zip="$1"
+weather=$($HOME/bin/runcached.py -t 60 \
+          "curl -s 'https://api.openweathermap.org/data/2.5/weather?zip=$zip&appid=$OWM_APIKEY&units=imperial' | jq '.main.temp' | cut -f1 -d'.'")
 
-# Fetch current ETH price.
-eth_json=$(runcached.py -t 10 "curl -L -s https://api.coinmarketcap.com/v1/ticker/ethereum")
-eth_price=$(echo "$eth_json" | jq '.[0].price_usd' | cut -d\" -f 2)
-eth_change=$(echo "$eth_json" | jq '.[0].percent_change_1h' | cut -d\" -f 2)
-
-# Fetch miner hashrate.
-eth_account="$2"
-hashrate_json=$(runcached.py -t 30 \
-                "curl -s https://api.nanopool.org/v1/eth/avghashrate/$eth_account")
-day_hr=$(echo "$hashrate_json" | jq '.data.h24')
-hour_hr=$(echo "$hashrate_json" | jq '.data.h1')
+# Mem usage
+total_mem=$(vmstat -sS M | grep "total memory" | sed 's/^[[:space:]]*//' | cut -f1 -d' ')
+used_mem=$(vmstat -sS M | grep "used memory" | sed 's/^[[:space:]]*//' | cut -f1 -d' ')
+percent_used=$(python3 -c "print(int($used_mem / float($total_mem) * 100))")
 
 # Final format and display.
-/usr/bin/printf "${weather}°F | ⚒ %.1f [%.1f] | ETH \$%'.2f [%.2f%%]" "$hour_hr" "$day_hr" "$eth_price" "$eth_change"
+/usr/bin/printf "${weather}°F | ${used_mem}/${total_mem} [${percent_used}%%]"
 
