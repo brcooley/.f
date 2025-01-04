@@ -1,0 +1,46 @@
+PS1='\[\e[1;31m\]$(err_code)\[\e[34m\]$(num_jobs \j)\[\e[32m\]$(__git_ps1 "%s ")\[\e[m\]\[\e[0;96m\]$(ps1_dir)\[\e[0m\]\$ '
+PS2='> '
+
+err_code() {
+  local err=$?
+  if [[ $err != 0 ]]; then
+    if [[ $err == 130 ]]; then
+      printf "^C "
+    else
+      printf "e=%d " ${err}
+    fi
+  fi
+}
+
+num_jobs() {
+  local j=$1
+  if [[ $j > 0 ]]; then
+    printf "j=%d " ${j}
+  fi
+}
+
+ps1_dir() {
+  local path="${PWD}"
+  case "${path}" in
+    */${USER}/code)
+      path="//"
+      ;;
+    */${USER}/code/*)
+      path="//${path#*/code/}"
+      ;;
+    /home/${USER})
+      path="~"
+      ;;
+    /home/${USER}/*)
+      path="~/${path#/home/*/}"
+      ;;
+    # OS X support
+    /Users/${USER})
+      path="~"
+      ;;
+    /Users/${USER}/*)
+      path="~/${path#/Users/*/}"
+      ;;
+  esac
+  printf "%s" "${path}"
+}

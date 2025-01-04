@@ -4,20 +4,25 @@
 
 # First, we set the PATH to include our private bin and .local bin
 if [ -d "${HOME}/bin" ] ; then
-	PATH="${HOME}/bin:${PATH}"
+  PATH="${HOME}/bin:${PATH}"
 fi
 
 if [ -d "${HOME}/.local/bin" ]; then
-	PATH="${HOME}/.local/bin:${PATH}"
+  PATH="${HOME}/.local/bin:${PATH}"
 fi
 
 # Source the local bash_profile if it exists
 if [ -f ~/.bash_profile_local ]; then
-	source ~/.bash_profile_local
+  source ~/.bash_profile_local
+fi
+
+# Update PS1/2
+if [ -f ~/.bash_prompt ]; then
+  source ~/.bash_prompt
 fi
 
 # Finally, source our specific customizations
 if [ -f ~/.bashrc ]; then
-	source ~/.bashrc
+  source ~/.bashrc
 fi
 

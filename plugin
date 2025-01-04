@@ -2,13 +2,13 @@
 #
 # Bash script to "plugin" to the dotfile repository. Turns normal dotfiles (e.g.
 # .bashrc) into symlinks to this repository's versions of those files. It
-# optionally moving old files so that they can be	preserved. A cron job is also
+# optionally moving old files so that they can be preserved. A cron job is also
 # setup to automate pulling new changes from master.
 
 shopt -s nocasematch  # This makes pattern matching case-insensitive
 
 POSTFIX="local"
-PLUGIN_FILES=( .bash_profile .bashrc .gitconfig .gitignore .jobs.cron .nanorc .tmux.conf )
+PLUGIN_FILES=( .bash_profile .bash_prompt .bashrc .gitconfig .gitignore .jobs.cron .nanorc .tmux.conf )
 
 PULLURL="https://github.com/brcooley/.f.git"
 PUSHURL="git@github.com:brcooley/.f.git"
