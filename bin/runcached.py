@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """Generic shell runner that caches results of a command.
 
 Adapted from https://bitbucket.org/sivann/runcached/src/master/runcached.py
@@ -63,7 +63,7 @@ def main():
 
   cmd = args.cmd
   cmd_shard = cmd.split()[0][:8]
-  cmd_hash = hashlib.sha1(cmd).hexdigest()[:8]
+  cmd_hash = hashlib.sha1(cmd.encode('utf-8')).hexdigest()[:8]
 
   pid_file = persistant_file(cmd_hash, cmd_shard, 'pid')
 
@@ -88,12 +88,14 @@ def main():
   with open(pid_file, 'w') as f:
     print(os.getpid(), file=f)
 
-  exit_code, output = run_cmd(cmd, cmd_hash, cmd_shard, args.ttl_secs)
-  print(output, end='' if output.endswith('\n') else '\n')
-
-  # Cleanup
-  os.remove(pid_file)
-  sys.exit(exit_code)
+  exit_code = -1
+  try:
+    exit_code, output = run_cmd(cmd, cmd_hash, cmd_shard, args.ttl_secs)
+    print(output, end='' if output.endswith('\n') else '\n')
+  finally:
+    # Cleanup
+    os.remove(pid_file)
+    sys.exit(exit_code)
 
 
 if __name__ == '__main__':
