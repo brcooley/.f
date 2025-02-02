@@ -1,10 +1,5 @@
 # .bashrc
 
-# Source global definitions
-if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
-fi
-
 # User specific aliases and functions
 ulimit -c unlimited
 
@@ -70,5 +65,5 @@ ghauth() {
 
 # Finally source machine specific definitions so we can overwrite these if needed
 if [ -f ~/.bashrc_local ]; then
-	. ~/.bashrc_local
+  . ~/.bashrc_local
 fi
