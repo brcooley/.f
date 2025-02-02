@@ -1,5 +1,8 @@
-PS1='\[\e[1;31m\]$(err_code)\[\e[34m\]$(num_jobs \j)\[\e[32m\]$(__git_ps1 "%s ")\[\e[m\]\[\e[0;96m\]$(ps1_dir)\[\e[0m\]\$ '
-PS2='> '
+# __git_ps1 is in a few different places. Only confirmed to work on OSX
+which -s brew && source "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh"
+
+export PS1='\[\e[1;31m\]$(err_code)\[\e[34m\]$(num_jobs \j)\[\e[32m\]$(__git_ps1 "%s ")\[\e[m\]\[\e[0;96m\]$(ps1_dir)\[\e[0m\]\$ '
+export PS2='> '
 
 err_code() {
   local err=$?
